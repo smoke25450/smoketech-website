@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="land.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smoke Technologies</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0a0a0a;
+      color: #e0e0e0;
+    }
+    header {
+      background: #121212;
+      padding: 2rem;
+      text-align: center;
+    }
+    header img {
+      height: 80px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #00bcd4;
+    }
+    h2 {
+      color: #00bcd4;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      margin: 1rem;
+      background-color: #00bcd4;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    footer {
+      background: #121212;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    .services ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .services li::before {
+      content: "\2714\0020";
+      color: #00bcd4;
+    }
+    form#statusForm {
+      margin-top: 2rem;
+    }
+    form#statusForm input {
+      padding: 0.5rem;
+      width: 60%;
+      max-width: 300px;
+      border: 1px solid #00bcd4;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+    form#statusForm button {
+      padding: 0.5rem 1rem;
+      background-color: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #typing {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #00bcd4;
+    }
+    .testimonial-slider {
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      max-width: 800px;
+      margin: auto;
+    }
+    .testimonial {
+      min-width: 100%;
+      transition: transform 1s ease;
+      text-align: center;
+    }
+    .testimonial p {
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+    .testimonial span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: bold;
+      color: #00bcd4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="land.png.png" alt="SmokeTech Logo" />
+    <h1>Smoke Technologies</h1>
+    <p><em>Care Beyond Repair</em></p>
+    <p id="typing"></p>
+    <a href="#contact" class="btn">Contact Us</a>
+    <a href="#booking" class="btn">Book a Repair</a>
+  </header>
+
+  <section>
+    <h2>About Us</h2>
+    <p>At Smoke Technologies, we blend deep tech expertise with personal service. From phones to laptops and everything in between, we deliver care beyond repair.</p>
+  </section>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Phone Repairs – Screens, Charging Ports, Batteries</li>
+      <li>Laptop Fixes – Software, Hardware, Reballing</li>
+      <li>Flashing & Unlocking – MTK, SPD, FRP Bypass</li>
+      <li>Remote Support & Consultations</li>
+      <li>Sales of Tools & Accessories</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-slider" id="testimonialSlider">
+      <div class="testimonial">
+        <p>"SmokeTech revived my phone like magic! 10/10 service."</p>
+        <span>— Mary K.</span>
+      </div>
+      <div class="testimonial">
+        <p>"Fast, affordable, and super professional."</p>
+        <span>— Juma M.</span>
+      </div>
+      <div class="testimonial">
+        <p>"Best tech repair experience I’ve had."</p>
+        <span>— Aisha T.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking">
+    <h2>Book a Repair</h2>
+    <p>Contact us on WhatsApp or Telegram to book a service:</p>
+    <a href="https://wa.me/254113017209" class="btn">WhatsApp</a>
+    <a href="https://t.me/smoke25450" class="btn">Telegram</a>
+
+    <form id="statusForm">
+      <h3>Check Repair Status</h3>
+      <input type="text" id="jobId" placeholder="Enter your Job ID" required />
+      <button type="submit">Check Status</button>
+      <p id="statusResult"></p>
+    </form>
+  </section>
+
+  <section id="contact">
+    <h2>Contact & Location</h2>
+    <p>📞 Phone: +254113017209<br>
+       📍 Location: Pwani University Gate, Kilifi–Malindi Highway<br>
+       🕒 Hours: Mon–Sat, 9:00 AM – 6:00 PM</p>
+  </section>
+
+  <footer>
+    <p>Smoke Technologies – Care Beyond Repair © 2025</p>
+  </footer>
+
+  <script>
+    const phrases = ["Flashing Experts", "Laptop Repair Gurus", "Phone Repair Pros"];
+    let i = 0, j = 0, current = "", isDeleting = false;
+
+    function typeEffect() {
+      const text = phrases[i];
+      current = isDeleting ? text.substring(0, j--) : text.substring(0, j++);
+      document.getElementById("typing").textContent = current;
+      if (!isDeleting && j === text.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 10000);
+      } else if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % phrases.length;
+      }
+      setTimeout(typeEffect, isDeleting ? 250 : 500);
+    }
+    typeEffect();
+
+    // Scroll animation
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // Status Checker
+    document.getElementById('statusForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const jobId = document.getElementById('jobId').value.trim();
+      const fakeDB = {
+        "ST1001": "In Progress",
+        "ST1002": "Ready for Pickup",
+        "ST1003": "Completed",
+        "ST1004": "Waiting for Parts"
+      };
+      const status = fakeDB[jobId.toUpperCase()];
+      const result = status ? `Status: ${status}` : "Job ID not found.";
+      document.getElementById('statusResult').textContent = result;
+    });
+
+    // Testimonial slider
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.testimonial');
+
+    function showSlides() {
+      slides.forEach((slide, i) => {
+        slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+      });
+      slideIndex = (slideIndex + 1) % slides.length;
+    }
+    setInterval(showSlides, 4000);
+  </script>
+</body>
+</html>
